@@ -2,41 +2,44 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Button, Heading, Link, Text } from 'react-aria-components'
 
 function App() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
+    const abortController = new AbortController()
     async function fetchIt() {
-      const res = await fetch('http://localhost:8000/api')
-      console.log(await res.json())
+      const res = await fetch('http://localhost:8000/api', {signal: abortController.signal})
+      console.log(res.ok && await res.json())
     }
     fetchIt()
+    return () => abortController.abort('Shoot...');
   }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
+    <main>
+      <div className='flex justify-evenly'>
+        <Link href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
+        </Link>
+        <Link href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        </Link>
       </div>
-      <h1>Vite + React</h1>
+      <Heading level={1}>Vite + React</Heading>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onPress={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
-        <p>
+        </Button>
+        <Text elementType='p'>
           Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        </Text>
       </div>
-      <p className="read-the-docs">
+      <Text elementType='p' className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </Text>
+    </main>
   )
 }
 
