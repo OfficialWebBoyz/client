@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
+import reactLogo from '~/assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './home.css'
 import { Button, Heading, Link, Text } from 'react-aria-components'
 
 function App() {
@@ -20,12 +20,12 @@ function App() {
   return (
     <main>
       <div className='flex justify-evenly'>
-        <Link href="https://vitejs.dev" target="_blank">
+        <Link href="play">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </Link>
-        <Link href="https://react.dev" target="_blank">
+        <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
-        </Link>
+        </a>
       </div>
       <Heading level={1}>Vite + React</Heading>
       <div className="card">
